@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -25,12 +26,12 @@ import androidx.tv.foundation.lazy.list.items
 import androidx.tv.foundation.lazy.list.rememberTvLazyListState
 import com.example.tamashatv.R
 
-//@Preview(
-//    widthDp = 1080,
-//    heightDp = 720,
-//    showBackground = true,
-//    backgroundColor = 0x000000
-//)
+@Preview(
+    widthDp = 1080,
+    heightDp = 720,
+    showBackground = true,
+    backgroundColor = 0x000000
+)
 @Composable
 fun DashboardScreen() {
     val lazyColumnScrollState = rememberTvLazyListState()
@@ -75,19 +76,14 @@ fun DashboardScreen() {
         }
         item {
             TvLazyRow {
-                items(getLastWatchListData()) { items ->
+                items(getContinueWatchingListData()) { items ->
                     RecyclerLayout(items)
                 }
             }
         }
-
-
     }
 }
-
-
-data class VideosList(val name: String, val smallBannerImage: Int) {
-}
+data class VideosList(val name: String, val smallBannerImage: Int)
 
 @Composable
 fun RecyclerLayout(items: VideosList) {
@@ -107,8 +103,7 @@ fun RecyclerLayout(items: VideosList) {
                     end.linkTo(parent.end, 10.dp)
                 }
                 .focusable(),
-
-            // border = BorderStroke(2.dp, Color.White)
+//             border = BorderStroke(2.dp, Color.White)
         ) {
             ConstraintLayout(
                 modifier = Modifier
@@ -128,7 +123,6 @@ fun RecyclerLayout(items: VideosList) {
                             end.linkTo(parent.end)
                         },
                     contentScale = ContentScale.Crop
-
                 )
                 Text(
                     text = items.name,
@@ -141,8 +135,6 @@ fun RecyclerLayout(items: VideosList) {
                             bottom.linkTo(parent.bottom, 5.dp)
                         })
             }
-
-
         }
     }
 
